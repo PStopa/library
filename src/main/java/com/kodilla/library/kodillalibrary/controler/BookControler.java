@@ -28,12 +28,12 @@ public class BookControler {
         return bookMapper.mapToBookDto(service.getBook(id).orElseThrow(BookNotFoundException::new));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteTask")
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteBook")
     public void deleteBook(@RequestParam String id) {
         service.deleteBook(Long.valueOf(id));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateTask")
+    @RequestMapping(method = RequestMethod.PUT, value = "updateBook")
     public BookDto updateBook(@RequestBody BookDto bookDto) {
         return bookMapper.mapToBookDto(service.saveBook(bookMapper.mapToBook(bookDto)));
     }

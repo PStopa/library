@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -25,4 +27,17 @@ public class Book {
 
     @Column(name = "PUBLICATION_YEAR")
     private int publicationYear;
+
+    @Column(name = "COPIES")
+    @OneToMany(
+            targetEntity = Copy.class,
+            mappedBy = "bookId",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Copy> copies = new ArrayList<>();
+
+    private void setCopies(List<Copy> copies) {
+        this.copies = copies;
+    }
 }

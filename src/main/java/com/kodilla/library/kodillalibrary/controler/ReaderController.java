@@ -4,10 +4,7 @@ import com.kodilla.library.kodillalibrary.domain.ReaderDto;
 import com.kodilla.library.kodillalibrary.mapper.ReaderMapper;
 import com.kodilla.library.kodillalibrary.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +25,20 @@ public class ReaderController {
     @RequestMapping(method = RequestMethod.GET, value = "getReader")
     public ReaderDto getReader(@RequestParam Long id) throws ReaderNotFoundException{
         return readerMapper.mapToReaderDto(service.getReader(id).orElseThrow(ReaderNotFoundException::new));
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "deleteReader")
+    public void deleteReader(@RequestParam String id) {
+        service.deleteReader(Long.valueOf(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateReader")
+    public ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
+        return readerMapper.mapToReaderDto(service.saveReader(readerMapper.mapToReader(readerDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "createReader")
+    public void createReader(@RequestBody ReaderDto readerDto) {
+        service.saveReader(readerMapper.mapToReader(readerDto));
     }
 }

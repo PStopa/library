@@ -16,7 +16,6 @@ public class Reader {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @NotNull
     @Column(name = "ID")
     private Long id;
 

@@ -14,19 +14,21 @@ public class BookMapper {
                 bookDto.getId(),
                 bookDto.getTitle(),
                 bookDto.getAuthor(),
-                bookDto.getPublicationYear());
+                bookDto.getPublicationYear(),
+                bookDto.getCopies());
     }
     public BookDto mapToBookDto(final Book book){
         return new BookDto(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
-                book.getPublicationYear());
+                book.getPublicationYear(),
+                book.getCopies());
     }
 
     public List<BookDto> mapToBookDtoList(final List<Book> bookList) {
         return bookList.stream()
-                .map(t -> new BookDto(t.getId(),t.getTitle(),t.getAuthor(),t.getPublicationYear()))
+                .map(t -> new BookDto(t.getId(),t.getTitle(),t.getAuthor(),t.getPublicationYear(),t.getCopies()))
                 .collect(Collectors.toList());
 
     }
