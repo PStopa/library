@@ -12,7 +12,7 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @RestController
 @RequestMapping("/library/book")
-public class BookControler {
+public class BookController {
     @Autowired
     private DbService service;
     @Autowired

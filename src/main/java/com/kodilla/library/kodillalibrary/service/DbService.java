@@ -1,9 +1,9 @@
 package com.kodilla.library.kodillalibrary.service;
 
-import com.kodilla.library.kodillalibrary.domain.Book;
-import com.kodilla.library.kodillalibrary.domain.Reader;
-import com.kodilla.library.kodillalibrary.domain.ReaderDto;
+import com.kodilla.library.kodillalibrary.domain.*;
 import com.kodilla.library.kodillalibrary.repository.BookRepository;
+import com.kodilla.library.kodillalibrary.repository.BorrowingRepository;
+import com.kodilla.library.kodillalibrary.repository.CopyRepository;
 import com.kodilla.library.kodillalibrary.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,34 +19,62 @@ public class DbService {
     @Autowired
     private ReaderRepository readerRepository;
 
+    @Autowired
+    private CopyRepository copyRepository;
+
+    @Autowired
+    private BorrowingRepository borrowingRepository;
+
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+    public List<Reader> getAllReaders() {
+        return readerRepository.findAll();
+    }
+    public List<Copy> getAllCopy() {
+        return copyRepository.findAll();
+    }
+    public List<Borrowing> getAllBorrowings() {
+        return borrowingRepository.findAll();
     }
 
     public Optional<Book> getBook(final Long id) {
         return bookRepository.findById(id);
     }
+    public Optional<Reader> getReader(final Long id) {
+        return readerRepository.findById(id);
+    }
+    public Optional<Copy> getCopy(final Long id) {
+        return copyRepository.findById(id);
+    }
+    public Optional<Borrowing> getBorrowing(final Long id) {
+        return borrowingRepository.findById(id);
+    }
 
     public Book saveBook(final Book book) {
         return bookRepository.save(book);
+    }
+    public Reader saveReader(final Reader reader) {
+        return readerRepository.save(reader);
+    }
+    public Copy saveCopy(final Copy copy) {
+        return copyRepository.save(copy);
+    }
+    public Borrowing saveBorrowing(final Borrowing borrowing) {
+        return borrowingRepository.save(borrowing);
     }
 
     public void deleteBook(final Long id) {
         bookRepository.delete(id);
     }
-
-    public List<Reader> getAllReaders() {
-        return readerRepository.findAll();
-    }
-    public Optional<Reader> getReader(final Long id) {
-        return readerRepository.findById(id);
-    }
-
-    public Reader saveReader(final Reader reader) {
-        return readerRepository.save(reader);
-    }
-
     public void deleteReader(final Long id) {
         readerRepository.delete(id);
     }
+    public void deleteCopy(final Long id) {
+        copyRepository.delete(id);
+    }
+    public void deleteBorrowing(final Long id) {
+        borrowingRepository.delete(id);
+    }
+
 }
