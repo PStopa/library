@@ -17,20 +17,20 @@ public class Borrowing {
     @Column(name = "ID")
     private Long id;
 
-    private Copy copy;
+    private Copy copyId;
     private Reader reader;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "COPY_ID")
-    public Copy getCopy() {
-        return copy;
+    public Copy getCopyId() {
+        return copyId;
     }
 
-    public void setCopy(Copy copy) {
-        this.copy = copy;
+    public void setCopyId(Copy copy) {
+        this.copyId = copy;
     }
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "READER_ID")
     public Reader getReader() {
         return reader;

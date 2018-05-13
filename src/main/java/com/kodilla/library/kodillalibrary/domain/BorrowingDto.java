@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BorrowingDto {
     private Long id;
-    private Copy copy;
+    private Copy copyId;
     private Reader reader;
 }

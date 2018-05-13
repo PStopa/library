@@ -12,20 +12,22 @@ public class CopyMapper {
     public Copy mapToCopy(final CopyDto copyDto) {
         return new Copy(
                 copyDto.getId(),
+                copyDto.getStatus(),
                 copyDto.getBookId(),
-                copyDto.getStatus());
+                copyDto.getBorrowings());
     }
 
     public CopyDto mapToCopyDto(final Copy copy) {
         return new CopyDto(
                 copy.getId(),
+                copy.getStatus(),
                 copy.getBookId(),
-                copy.getStatus());
+                copy.getBorrowings());
     }
 
     public List<CopyDto> mapToCopyDtoList(final List<Copy> copyList) {
         return copyList.stream()
-                .map(t -> new CopyDto(t.getId(), t.getBookId(), t.getStatus()))
+                .map(t -> new CopyDto(t.getId(), t.getStatus(), t.getBookId(), t.getBorrowings()))
                 .collect(Collectors.toList());
     }
 }

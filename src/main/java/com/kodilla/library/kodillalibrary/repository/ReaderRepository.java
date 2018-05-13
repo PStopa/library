@@ -1,6 +1,5 @@
 package com.kodilla.library.kodillalibrary.repository;
 
-import com.kodilla.library.kodillalibrary.domain.Book;
 import com.kodilla.library.kodillalibrary.domain.Reader;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

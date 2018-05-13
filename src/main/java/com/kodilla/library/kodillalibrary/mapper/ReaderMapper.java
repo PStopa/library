@@ -14,7 +14,8 @@ public class ReaderMapper {
                 readerDto.getId(),
                 readerDto.getName(),
                 readerDto.getSurname(),
-                readerDto.getSignUpDate());
+                readerDto.getSignUpDate(),
+                readerDto.getBorrowings());
     }
 
     public ReaderDto mapToReaderDto(final Reader reader) {
@@ -22,12 +23,13 @@ public class ReaderMapper {
                 reader.getId(),
                 reader.getName(),
                 reader.getSurname(),
-                reader.getSignUpDate());
+                reader.getSignUpDate(),
+                reader.getBorrowings());
     }
 
     public List<ReaderDto> mapToReaderDtoList(final List<Reader> readerList) {
         return readerList.stream()
-                .map(t -> new ReaderDto(t.getId(),t.getName(),t.getSurname(),t.getSignUpDate()))
+                .map(t -> new ReaderDto(t.getId(),t.getName(),t.getSurname(),t.getSignUpDate(), t.getBorrowings()))
                 .collect(Collectors.toList());
     }
 }

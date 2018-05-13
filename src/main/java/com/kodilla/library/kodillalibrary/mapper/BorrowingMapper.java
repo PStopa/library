@@ -12,20 +12,20 @@ public class BorrowingMapper {
     public Borrowing mapToBorrowing(final BorrowingDto borrowingDto) {
         return new Borrowing(
                 borrowingDto.getId(),
-                borrowingDto.getCopy(),
+                borrowingDto.getCopyId(),
                 borrowingDto.getReader());
     }
 
     public BorrowingDto mapToBorrowingDto(final Borrowing borrowing) {
         return new BorrowingDto(
                 borrowing.getId(),
-                borrowing.getCopy(),
+                borrowing.getCopyId(),
                 borrowing.getReader());
     }
 
     public List<BorrowingDto> mapToBorrowingDtoList(final List<Borrowing> borrowingList) {
         return borrowingList.stream()
-                .map(t -> new BorrowingDto(t.getId(),t.getCopy(),t.getReader()))
+                .map(t -> new BorrowingDto(t.getId(),t.getCopyId(),t.getReader()))
                 .collect(Collectors.toList());
     }
 }

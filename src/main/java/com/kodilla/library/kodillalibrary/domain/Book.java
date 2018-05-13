@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +16,7 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
 
     @Column(name = "TITLE")
@@ -28,16 +28,20 @@ public class Book {
     @Column(name = "PUBLICATION_YEAR")
     private int publicationYear;
 
-    @Column(name = "COPIES")
+    private List<Copy> copies = new ArrayList<>();
+
+    @Column(name = "COPIES_ID")
     @OneToMany(
             targetEntity = Copy.class,
             mappedBy = "bookId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    private List<Copy> copies = new ArrayList<>();
+    public List<Copy> getCopies() {
+        return copies;
+    }
 
-    private void setCopies(List<Copy> copies) {
+    public void setCopies(List<Copy> copies) {
         this.copies = copies;
     }
 }

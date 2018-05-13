@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -31,5 +33,22 @@ public class Reader {
         this.name = name;
         this.surname = surname;
         this.signUpDate = LocalDate.now();
+    }
+
+    private List<Borrowing> borrowings = new ArrayList<>();
+
+    @Column(name = "BORROWINGS_ID")
+    @OneToMany(
+            targetEntity = Borrowing.class,
+            mappedBy = "reader",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    public List<Borrowing> getBorrowings() {
+        return borrowings;
+    }
+
+    public void setBorrowings(List<Borrowing> borrowings) {
+        this.borrowings = borrowings;
     }
 }
