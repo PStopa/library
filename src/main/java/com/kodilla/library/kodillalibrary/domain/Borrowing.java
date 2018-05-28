@@ -3,13 +3,16 @@ package com.kodilla.library.kodillalibrary.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "BORROWINGS")
+@Entity
+@Table(name = "BORROWINGS")
 public class Borrowing {
 
     @Id
@@ -17,27 +20,11 @@ public class Borrowing {
     @Column(name = "ID")
     private Long id;
 
-    private Copy copyId;
-    private Reader reader;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "COPY_ID")
-    public Copy getCopyId() {
-        return copyId;
-    }
+    private Copy copyId;
 
-    public void setCopyId(Copy copy) {
-        this.copyId = copy;
-    }
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "READER_ID")
-    public Reader getReader() {
-        return reader;
-    }
-
-    public void setReader(Reader reader) {
-        this.reader = reader;
-    }
-
+    private Reader reader;
 }

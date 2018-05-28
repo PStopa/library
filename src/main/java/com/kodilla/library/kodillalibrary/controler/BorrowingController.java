@@ -1,5 +1,6 @@
 package com.kodilla.library.kodillalibrary.controler;
 
+import com.kodilla.library.kodillalibrary.domain.Borrowing;
 import com.kodilla.library.kodillalibrary.domain.BorrowingDto;
 import com.kodilla.library.kodillalibrary.mapper.BorrowingMapper;
 import com.kodilla.library.kodillalibrary.service.DbService;
@@ -36,4 +37,9 @@ public class BorrowingController {
         return borrowingMapper.mapToBorrowingDto(service.saveBorrowing(borrowingMapper.mapToBorrowing(borrowingDto)));
     }
 
+    @RequestMapping(method = RequestMethod.POST, value = "createBorrowing")
+    public void createBorrowing(@RequestBody BorrowingDto borrowingDto) {
+        service.saveBorrowing(borrowingMapper.mapToBorrowing(borrowingDto));
+       // service.saveBorrowing(borrowingMapper.mapToBorrowing(borrowingDto));
+    }
 }

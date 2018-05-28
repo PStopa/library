@@ -52,6 +52,8 @@ public class DbService {
     }
 
     public Book saveBook(final Book book) {
+        book.getCopies().stream()
+                .forEach(t -> t.setBookId(book));
         return bookRepository.save(book);
     }
     public Reader saveReader(final Reader reader) {
@@ -75,6 +77,30 @@ public class DbService {
     }
     public void deleteBorrowing(final Long id) {
         borrowingRepository.delete(id);
+    }
+
+    public void saveTest() {
+        Book book = new Book("titlesTest2", "authorTest2", 2222);
+        Copy copy = new Copy("statusTest2");
+        copy.setBookId(book);
+        book.getCopies().add(copy);
+
+        bookRepository.save(book);
+    }
+
+    public void saveTestBorrowing() {
+        Book book = new Book("titlesTest2", "authorTest2", 2222);
+        Copy copy = new Copy("statusTest2");
+        Reader reader = new Reader(1L,"Stasiek", "Nowak");
+        copy.setBookId(book);
+        book.getCopies().add(copy);
+        Borrowing borrowing = new Borrowing(1L, copy,reader);
+        copy.getBorrowings().add(borrowing);
+        borrowing.setCopyId(copy);
+        borrowing.setReader(reader);
+        borrowing.setId(1L);
+
+        bookRepository.save(book);
     }
 
 }

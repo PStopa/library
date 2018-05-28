@@ -3,6 +3,8 @@ package com.kodilla.library.kodillalibrary.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -10,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity(name = "READERS")
+@Setter
+@Entity
+@Table(name = "READERS")
 public class Reader {
 
     @Id
@@ -29,26 +31,29 @@ public class Reader {
     @Column(name = "SIGN_UP_DATE")
     private LocalDate signUpDate;
 
-    public Reader(String name, String surname) {
+    public Reader(Long id, String name, String surname, LocalDate signUpDate, List<Borrowing> borrowings) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.signUpDate = LocalDate.now();
+        this.borrowings = borrowings;
+    }
+
+    public Reader(Long id, String name, String surname) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.signUpDate = LocalDate.now();
     }
 
-    private List<Borrowing> borrowings = new ArrayList<>();
+    public Reader() {
+    }
 
-    @Column(name = "BORROWINGS_ID")
     @OneToMany(
             targetEntity = Borrowing.class,
             mappedBy = "reader",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Borrowing> getBorrowings() {
-        return borrowings;
-    }
-
-    public void setBorrowings(List<Borrowing> borrowings) {
-        this.borrowings = borrowings;
-    }
+    private List<Borrowing> borrowings = new ArrayList<>();
 }

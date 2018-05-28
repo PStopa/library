@@ -29,5 +29,7 @@ public class CopyMapper {
         return copyList.stream()
                 .map(t -> new CopyDto(t.getId(), t.getStatus(), t.getBookId(), t.getBorrowings()))
                 .collect(Collectors.toList());
+//                .map(t -> new CopyDto(t.getId(), t.getStatus(), t.getBookId()))
+//                .collect(Collectors.toList());
     }
 }

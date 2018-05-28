@@ -1,17 +1,24 @@
 package com.kodilla.library.kodillalibrary.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "COPIES")
 @Getter
-@NoArgsConstructor
+@Setter
 @AllArgsConstructor
-@Entity(name = "COPIES")
+@NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Copy {
 
     @Id
@@ -22,33 +29,21 @@ public class Copy {
     @Column(name = "STATUS")
     private String status;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BOOK_ID")
+    @JsonBackReference
     private Book bookId;
 
-    @ManyToOne
-    @JoinColumn(name = "BOOK_ID")
-    public Book getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(Book book) {
-        this.bookId = book;
-    }
-
-    private List<Borrowing> borrowings = new ArrayList<>();
-
-    @Column(name = "BORROWINGS_ID")
     @OneToMany(
             targetEntity = Borrowing.class,
             mappedBy = "copyId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Borrowing> getBorrowings() {
-        return borrowings;
-    }
+    private List<Borrowing> borrowings = new ArrayList<>();
 
-    public void setBorrowings(List<Borrowing> borrowings) {
-        this.borrowings = borrowings;
+
+    public Copy(String status) {
+        this.status = status;
     }
 }

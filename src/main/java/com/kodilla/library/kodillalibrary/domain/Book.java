@@ -1,17 +1,23 @@
 package com.kodilla.library.kodillalibrary.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "BOOKS")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "BOOKS")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Book {
 
     @Id
@@ -28,20 +34,18 @@ public class Book {
     @Column(name = "PUBLICATION_YEAR")
     private int publicationYear;
 
-    private List<Copy> copies = new ArrayList<>();
-
-    @Column(name = "COPIES_ID")
     @OneToMany(
             targetEntity = Copy.class,
             mappedBy = "bookId",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
-    public List<Copy> getCopies() {
-        return copies;
-    }
+    @JsonManagedReference
+    private List<Copy> copies = new ArrayList<>();
 
-    public void setCopies(List<Copy> copies) {
-        this.copies = copies;
+    public Book(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
     }
 }

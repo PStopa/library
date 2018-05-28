@@ -7,7 +7,6 @@ import com.kodilla.library.kodillalibrary.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
 
 @RestController
@@ -41,6 +40,11 @@ public class BookController {
     @RequestMapping(method = RequestMethod.POST, value = "createBook")
     public void createBook(@RequestBody BookDto bookDto) {
         service.saveBook(bookMapper.mapToBook(bookDto));
+    }
+
+        @RequestMapping(method = RequestMethod.POST, value = "createTest")
+    public void createTest(@RequestBody BookDto bookDto) {
+       service.saveTest();
     }
 
 }
