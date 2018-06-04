@@ -11,4 +11,6 @@ public class BorrowingDto {
     private Long id;
     private Copy copyId;
     private Reader reader;
+    private String borrowDate;
+    private String returnDate;
 }

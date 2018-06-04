@@ -4,12 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+public class BookDtos {
     private Long id;
 
     private String title;
@@ -17,7 +15,4 @@ public class BookDto {
     private String author;
 
     private int publicationYear;
-
-    private List<Copy> copies;
-
 }

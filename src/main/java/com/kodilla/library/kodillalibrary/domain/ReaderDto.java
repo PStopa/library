@@ -14,6 +14,6 @@ public class ReaderDto {
     private Long id;
     private String name;
     private String surname;
-    private LocalDate signUpDate;
+    private String signUpDate;
     private List<Borrowing> borrowings;
 }

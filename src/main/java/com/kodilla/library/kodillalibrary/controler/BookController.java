@@ -2,6 +2,7 @@ package com.kodilla.library.kodillalibrary.controler;
 
 
 import com.kodilla.library.kodillalibrary.domain.BookDto;
+import com.kodilla.library.kodillalibrary.domain.BookDtos;
 import com.kodilla.library.kodillalibrary.mapper.BookMapper;
 import com.kodilla.library.kodillalibrary.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class BookController {
     private BookMapper bookMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getBooks")
-    public List<BookDto> getBooks() {
+    public List<BookDtos> getBooks() {
         return bookMapper.mapToBookDtoList(service.getAllBooks());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getBook")
-    public BookDto getBook(@RequestParam Long id) throws BookNotFoundException{
+    public BookDtos getBook(@RequestParam Long id) throws BookNotFoundException{
         return bookMapper.mapToBookDto(service.getBook(id).orElseThrow(BookNotFoundException::new));
     }
 
@@ -33,7 +34,7 @@ public class BookController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateBook")
-    public BookDto updateBook(@RequestBody BookDto bookDto) {
+    public BookDtos updateBook(@RequestBody BookDto bookDto) {
         return bookMapper.mapToBookDto(service.saveBook(bookMapper.mapToBook(bookDto)));
     }
 

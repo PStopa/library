@@ -12,6 +12,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQuery(
+        name = "Copy.retrieveCopyToBorrow",
+        query = "SELECT COUNT(*) FROM COPIES WHERE status LIKE :bookStatus;"
+)
+
 @Entity
 @Table(name = "COPIES")
 @Getter

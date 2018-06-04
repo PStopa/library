@@ -2,6 +2,7 @@ package com.kodilla.library.kodillalibrary.mapper;
 
 import com.kodilla.library.kodillalibrary.domain.Copy;
 import com.kodilla.library.kodillalibrary.domain.CopyDto;
+import com.kodilla.library.kodillalibrary.domain.CopyDtos;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,19 +18,16 @@ public class CopyMapper {
                 copyDto.getBorrowings());
     }
 
-    public CopyDto mapToCopyDto(final Copy copy) {
-        return new CopyDto(
+    public CopyDtos mapToCopyDto(final Copy copy) {
+        return new CopyDtos(
                 copy.getId(),
                 copy.getStatus(),
-                copy.getBookId(),
-                copy.getBorrowings());
+                copy.getBookId().getId());
     }
 
-    public List<CopyDto> mapToCopyDtoList(final List<Copy> copyList) {
+    public List<CopyDtos> mapToCopyDtoList(final List<Copy> copyList) {
         return copyList.stream()
-                .map(t -> new CopyDto(t.getId(), t.getStatus(), t.getBookId(), t.getBorrowings()))
+                .map(t -> new CopyDtos(t.getId(), t.getStatus(), t.getBookId().getId()))
                 .collect(Collectors.toList());
-//                .map(t -> new CopyDto(t.getId(), t.getStatus(), t.getBookId()))
-//                .collect(Collectors.toList());
     }
 }

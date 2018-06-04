@@ -2,6 +2,7 @@ package com.kodilla.library.kodillalibrary.mapper;
 
 import com.kodilla.library.kodillalibrary.domain.Book;
 import com.kodilla.library.kodillalibrary.domain.BookDto;
+import com.kodilla.library.kodillalibrary.domain.BookDtos;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,18 +18,17 @@ public class BookMapper {
                 bookDto.getPublicationYear(),
                 bookDto.getCopies());
     }
-    public BookDto mapToBookDto(final Book book){
-        return new BookDto(
+    public BookDtos mapToBookDto(final Book book){
+        return new BookDtos(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
-                book.getPublicationYear(),
-                book.getCopies());
+                book.getPublicationYear());
     }
 
-    public List<BookDto> mapToBookDtoList(final List<Book> bookList) {
+    public List<BookDtos> mapToBookDtoList(final List<Book> bookList) {
         return bookList.stream()
-                .map(t -> new BookDto(t.getId(),t.getTitle(),t.getAuthor(),t.getPublicationYear(),t.getCopies()))
+                .map(t -> new BookDtos(t.getId(),t.getTitle(),t.getAuthor(),t.getPublicationYear()))
                 .collect(Collectors.toList());
 
     }

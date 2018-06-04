@@ -1,6 +1,7 @@
 package com.kodilla.library.kodillalibrary.controler;
 
 import com.kodilla.library.kodillalibrary.domain.ReaderDto;
+import com.kodilla.library.kodillalibrary.domain.ReaderDtos;
 import com.kodilla.library.kodillalibrary.mapper.ReaderMapper;
 import com.kodilla.library.kodillalibrary.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class ReaderController {
     private ReaderMapper readerMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getReaders")
-    public List<ReaderDto> getReaders() {
+    public List<ReaderDtos> getReaders() {
         return readerMapper.mapToReaderDtoList(service.getAllReaders());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getReader")
-    public ReaderDto getReader(@RequestParam Long id) throws ReaderNotFoundException{
+    public ReaderDtos getReader(@RequestParam Long id) throws ReaderNotFoundException{
         return readerMapper.mapToReaderDto(service.getReader(id).orElseThrow(ReaderNotFoundException::new));
     }
 
@@ -33,7 +34,7 @@ public class ReaderController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateReader")
-    public ReaderDto updateReader(@RequestBody ReaderDto readerDto) {
+    public ReaderDtos updateReader(@RequestBody ReaderDto readerDto) {
         return readerMapper.mapToReaderDto(service.saveReader(readerMapper.mapToReader(readerDto)));
     }
 

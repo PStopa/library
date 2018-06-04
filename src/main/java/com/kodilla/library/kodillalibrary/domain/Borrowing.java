@@ -6,11 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "BORROWINGS")
 public class Borrowing {
@@ -27,4 +26,26 @@ public class Borrowing {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "READER_ID")
     private Reader reader;
+
+    @Column(name = "BORROW_DATE")
+    private String borrowDate;
+
+    @Column(name = "RETURN_DATE")
+    private String returnDate;
+
+    public Borrowing(Copy copyId, Reader reader) {
+        this.copyId = copyId;
+        this.reader = reader;
+    }
+
+    public Borrowing() {
+    }
+
+    public Borrowing(Long id, Copy copyId, Reader reader, String borrowDate, String returnDate) {
+        this.id = id;
+        this.copyId = copyId;
+        this.reader = reader;
+        this.borrowDate = LocalDate.now().toString();
+        this.returnDate = returnDate;
+    }
 }

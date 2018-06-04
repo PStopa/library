@@ -8,6 +8,7 @@ import com.kodilla.library.kodillalibrary.repository.ReaderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -79,6 +80,14 @@ public class DbService {
         borrowingRepository.delete(id);
     }
 
+    public int retrieveCopyToBorrow(final String bookStatus) {
+        return copyRepository.retrieveCopyToBorrow(bookStatus);
+    }
+
+    public long countByStatus(final String bookStatus) {
+        return copyRepository.countByStatus(bookStatus);
+    }
+
     public void saveTest() {
         Book book = new Book("titlesTest2", "authorTest2", 2222);
         Copy copy = new Copy("statusTest2");
@@ -94,7 +103,7 @@ public class DbService {
         Reader reader = new Reader(1L,"Stasiek", "Nowak");
         copy.setBookId(book);
         book.getCopies().add(copy);
-        Borrowing borrowing = new Borrowing(1L, copy,reader);
+        Borrowing borrowing = new Borrowing(copy,reader);
         copy.getBorrowings().add(borrowing);
         borrowing.setCopyId(copy);
         borrowing.setReader(reader);

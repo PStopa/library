@@ -1,6 +1,7 @@
 package com.kodilla.library.kodillalibrary.controler;
 
 import com.kodilla.library.kodillalibrary.domain.CopyDto;
+import com.kodilla.library.kodillalibrary.domain.CopyDtos;
 import com.kodilla.library.kodillalibrary.mapper.CopyMapper;
 import com.kodilla.library.kodillalibrary.service.DbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class CopyController {
     private CopyMapper copyMapper;
 
     @RequestMapping(method = RequestMethod.GET, value = "getCopies")
-    public List<CopyDto> getCopies() {
+    public List<CopyDtos> getCopies() {
         return copyMapper.mapToCopyDtoList(service.getAllCopy());
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getCopy")
-    public CopyDto getCopy(@RequestParam Long id) throws CopyNotFoundException {
+    public CopyDtos getCopy(@RequestParam Long id) throws CopyNotFoundException {
         return copyMapper.mapToCopyDto(service.getCopy(id).orElseThrow(CopyNotFoundException::new));
     }
 
@@ -33,7 +34,7 @@ public class CopyController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "updateCopy")
-    public CopyDto updateCopy(@RequestBody CopyDto copyDto) {
+    public CopyDtos updateCopy(@RequestBody CopyDto copyDto) {
 
         return copyMapper.mapToCopyDto(service.saveCopy(copyMapper.mapToCopy(copyDto)));
     }
@@ -42,5 +43,17 @@ public class CopyController {
     public void createCopy(@RequestBody CopyDto copyDto) {
         service.saveCopy(copyMapper.mapToCopy(copyDto));
     }
+
+    @RequestMapping(method = RequestMethod.GET, value = "CopyToBorrow")
+    public int retrieveCopyToBorrow(@RequestParam String bookStatus) {
+        return service.retrieveCopyToBorrow(bookStatus);
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "countByStatus")
+    public long countByStatus(@RequestParam String bookStatus) {
+        return service.countByStatus(bookStatus);
+    }
+
+
 
 }

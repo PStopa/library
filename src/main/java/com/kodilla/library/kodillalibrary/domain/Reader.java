@@ -1,5 +1,6 @@
 package com.kodilla.library.kodillalibrary.domain;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,25 +30,7 @@ public class Reader {
     private String surname;
 
     @Column(name = "SIGN_UP_DATE")
-    private LocalDate signUpDate;
-
-    public Reader(Long id, String name, String surname, LocalDate signUpDate, List<Borrowing> borrowings) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.signUpDate = LocalDate.now();
-        this.borrowings = borrowings;
-    }
-
-    public Reader(Long id, String name, String surname) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.signUpDate = LocalDate.now();
-    }
-
-    public Reader() {
-    }
+    private String signUpDate;
 
     @OneToMany(
             targetEntity = Borrowing.class,
@@ -56,4 +39,22 @@ public class Reader {
             fetch = FetchType.LAZY
     )
     private List<Borrowing> borrowings = new ArrayList<>();
+
+    public Reader(Long id, String name, String surname, String signUpDate, List<Borrowing> borrowings) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.borrowings = borrowings;
+        this.signUpDate = LocalDate.now().toString();
+    }
+
+    public Reader(Long id, String name, String surname) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.signUpDate = LocalDate.now().toString();
+    }
+
+    public Reader() {
+    }
 }

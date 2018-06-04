@@ -4,20 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookDto {
+public class ReaderDtos {
     private Long id;
-
-    private String title;
-
-    private String author;
-
-    private int publicationYear;
-
-    private List<Copy> copies;
-
+    private String name;
+    private String surname;
+    private String signUpDate;
 }
