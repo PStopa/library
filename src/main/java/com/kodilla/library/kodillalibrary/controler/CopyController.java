@@ -1,5 +1,6 @@
 package com.kodilla.library.kodillalibrary.controler;
 
+import com.kodilla.library.kodillalibrary.domain.Copy;
 import com.kodilla.library.kodillalibrary.domain.CopyDto;
 import com.kodilla.library.kodillalibrary.domain.CopyDtos;
 import com.kodilla.library.kodillalibrary.mapper.CopyMapper;
@@ -44,16 +45,12 @@ public class CopyController {
         service.saveCopy(copyMapper.mapToCopy(copyDto));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "CopyToBorrow")
-    public int retrieveCopyToBorrow(@RequestParam String bookStatus) {
-        return service.retrieveCopyToBorrow(bookStatus);
-    }
-
     @RequestMapping(method = RequestMethod.GET, value = "countByStatus")
-    public long countByStatus(@RequestParam String bookStatus) {
-        return service.countByStatus(bookStatus);
+    public long countByStatus(@RequestParam String title,@RequestParam String bookStatus) {
+        List<Copy> copies = service.countByStatus(bookStatus);
+
+        return copies.stream()
+                .filter(copy -> copy.getBookId().getTitle().equals(title))
+                .count();
     }
-
-
-
 }

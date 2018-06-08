@@ -80,12 +80,8 @@ public class DbService {
         borrowingRepository.delete(id);
     }
 
-    public int retrieveCopyToBorrow(final String bookStatus) {
-        return copyRepository.retrieveCopyToBorrow(bookStatus);
-    }
-
-    public long countByStatus(final String bookStatus) {
-        return copyRepository.countByStatus(bookStatus);
+    public List<Copy> countByStatus(final String bookStatus) {
+        return copyRepository.findByStatus(bookStatus);
     }
 
     public void saveTest() {
@@ -96,20 +92,4 @@ public class DbService {
 
         bookRepository.save(book);
     }
-
-    public void saveTestBorrowing() {
-        Book book = new Book("titlesTest2", "authorTest2", 2222);
-        Copy copy = new Copy("statusTest2");
-        Reader reader = new Reader(1L,"Stasiek", "Nowak");
-        copy.setBookId(book);
-        book.getCopies().add(copy);
-        Borrowing borrowing = new Borrowing(copy,reader);
-        copy.getBorrowings().add(borrowing);
-        borrowing.setCopyId(copy);
-        borrowing.setReader(reader);
-        borrowing.setId(1L);
-
-        bookRepository.save(book);
-    }
-
 }

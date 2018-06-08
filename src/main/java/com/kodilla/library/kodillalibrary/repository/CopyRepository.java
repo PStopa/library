@@ -23,8 +23,5 @@ public interface CopyRepository extends CrudRepository<Copy, Long> {
     @Override
     void delete(Long id);
 
-    @Query(nativeQuery = true)
-    int retrieveCopyToBorrow(String bookStatus);
-
-    long countByStatus(String bookStatus);
+    List<Copy> findByStatus(String bookStatus);
 }
