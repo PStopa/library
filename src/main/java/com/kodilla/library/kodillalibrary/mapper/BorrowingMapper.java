@@ -6,6 +6,7 @@ import com.kodilla.library.kodillalibrary.domain.BorrowingDtos;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -15,12 +16,13 @@ public class BorrowingMapper {
     }
 
     public BorrowingDtos mapToBorrowingDto(final Borrowing borrowing) {
-        return new BorrowingDtos(borrowing.getId(), borrowing.getCopyId().getBookId().getTitle(), borrowing.getReader().getName(), borrowing.getReader().getSurname(), borrowing.getBorrowDate(), borrowing.getReturnDate());
+        return new BorrowingDtos(borrowing.getId(), borrowing.getCopyId().getBookId().getTitle(), borrowing.getReader().getName(), borrowing.getReader().getSurname(), borrowing.getBorrowDate().toString(), Objects.toString(borrowing.getReturnDate(),""));
     }
 
     public List<BorrowingDtos> mapToBorrowingDtoList(final List<Borrowing> borrowingList) {
         return borrowingList.stream()
-                .map(t -> new BorrowingDtos(t.getId(),t.getCopyId().getBookId().getTitle(),t.getReader().getName(), t.getReader().getSurname(), t.getBorrowDate(), t.getReturnDate()))
+                .map(t -> new BorrowingDtos(t.getId(),t.getCopyId().getBookId().getTitle(),t.getReader().getName(),
+                        t.getReader().getSurname(), t.getBorrowDate().toString(), Objects.toString(t.getReturnDate(),"")))
                 .collect(Collectors.toList());
     }
 }

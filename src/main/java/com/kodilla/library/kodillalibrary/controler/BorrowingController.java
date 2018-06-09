@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,7 +62,7 @@ public class BorrowingController {
 
         if(borrowing.get().getReturnDate() == null) {
 
-            borrowing.get().setReturnDate(LocalDate.now().toString());
+            borrowing.get().setReturnDate(new Date());
             service.saveBorrowing(borrowing.get());
 
             copy.get().setStatus("w obiegu");

@@ -5,6 +5,7 @@ import com.kodilla.library.kodillalibrary.domain.ReaderDto;
 import com.kodilla.library.kodillalibrary.domain.ReaderDtos;
 import org.springframework.stereotype.Component;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,12 +25,12 @@ public class ReaderMapper {
                 reader.getId(),
                 reader.getName(),
                 reader.getSurname(),
-                reader.getSignUpDate());
+                reader.getSignUpDate().toString());
     }
 
     public List<ReaderDtos> mapToReaderDtoList(final List<Reader> readerList) {
         return readerList.stream()
-                .map(t -> new ReaderDtos(t.getId(),t.getName(),t.getSurname(),t.getSignUpDate()))
+                .map(t -> new ReaderDtos(t.getId(),t.getName(),t.getSurname(),t.getSignUpDate().toString()))
                 .collect(Collectors.toList());
     }
 }

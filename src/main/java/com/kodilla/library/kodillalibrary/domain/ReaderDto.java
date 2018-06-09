@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,6 +16,6 @@ public class ReaderDto {
     private Long id;
     private String name;
     private String surname;
-    private String signUpDate;
+    private Date signUpDate;
     private List<Borrowing> borrowings;
 }

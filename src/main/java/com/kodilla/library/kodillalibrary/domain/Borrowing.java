@@ -1,12 +1,10 @@
 package com.kodilla.library.kodillalibrary.domain;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -28,10 +26,10 @@ public class Borrowing {
     private Reader reader;
 
     @Column(name = "BORROW_DATE")
-    private String borrowDate;
+    private Date borrowDate;
 
     @Column(name = "RETURN_DATE")
-    private String returnDate;
+    private Date returnDate;
 
     public Borrowing(Copy copyId, Reader reader) {
         this.copyId = copyId;
@@ -41,11 +39,11 @@ public class Borrowing {
     public Borrowing() {
     }
 
-    public Borrowing(Long id, Copy copyId, Reader reader, String borrowDate, String returnDate) {
+    public Borrowing(Long id, Copy copyId, Reader reader, Date borrowDate, Date returnDate) {
         this.id = id;
         this.copyId = copyId;
         this.reader = reader;
-        this.borrowDate = LocalDate.now().toString();
+        this.borrowDate = new Date();
         this.returnDate = returnDate;
     }
 }

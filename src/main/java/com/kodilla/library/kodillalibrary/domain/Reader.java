@@ -1,15 +1,11 @@
 package com.kodilla.library.kodillalibrary.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -30,7 +26,7 @@ public class Reader {
     private String surname;
 
     @Column(name = "SIGN_UP_DATE")
-    private String signUpDate;
+    private Date signUpDate;
 
     @OneToMany(
             targetEntity = Borrowing.class,
@@ -40,19 +36,19 @@ public class Reader {
     )
     private List<Borrowing> borrowings = new ArrayList<>();
 
-    public Reader(Long id, String name, String surname, String signUpDate, List<Borrowing> borrowings) {
+    public Reader(Long id, String name, String surname, Date signUpDate, List<Borrowing> borrowings) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.borrowings = borrowings;
-        this.signUpDate = LocalDate.now().toString();
+        this.signUpDate = new Date();
     }
 
     public Reader(Long id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;
-        this.signUpDate = LocalDate.now().toString();
+        this.signUpDate = new Date();
     }
 
     public Reader() {
